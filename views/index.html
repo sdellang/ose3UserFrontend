@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+        padding-top: 50px;
+        padding-bottom: 20px;
+        }
+        .jumbotron {
+            background-image: url("http://www.redhat.com/profiles/rh/themes/redhatdotcom/img/home/sidekick-jun15-2000x365.png");
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Openshift Microservice Example</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" action="/insertUser" method="post">
+                <div class="form-group">
+                    <input type="text" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Surname" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Add User</button>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Hello, Openshift!</h1>
+        <p>This is a simple Node.js application to show how microservices interact in Openshift</p>
+        <p><a class="btn btn-primary btn-lg" href="http://openshift.org" role="button">Learn more »</a></p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Search by mail</h2>
+            <form action="/searchmail">
+                <div class="form-group">
+                    <input id="searchmail" type="text" name="searchmail" placeholder="Email" class="form-control">
+                </div>
+                <button class="btn btn-primary" type="submit">Go »</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h2>Search by name</h2>
+            <form action="/searchmail">
+                <div class="form-group">
+                    <input id="searchname" type="text" name="searchname" placeholder="Name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input id="searchsurname" type="text" name="searchsurname" placeholder="Surname" class="form-control">
+                </div>
+                <button class="btn btn-primary" type="submit">Go »</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <h2>Get all</h2>
+            <p><a class="btn btn-primary" href="/getall" role="button">Get All »</a></p>
+        </div>
+    </div>
+    <% if (name) { %>
+        <hr>
+        <div class="container">
+            <h2>Name: <%= name %></h2>
+        </div>
+    <% } if (name == null) { %>
+        <div class="container">
+            <h3>No data</h3>
+        </div>
+    <% } %>
+    <hr>
+
+    <footer>
+        <p></p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/bootstrap/dist/css/bootstrap.min.css"></script>
+
+</body>
+</html>
