@@ -66,7 +66,7 @@ app.get('/searchmail',function (req, res) {
             host: serviceHost,
             path: path
         };
-        http.request(options,function (response) {
+        var request = http.request(options,function (response) {
 
              //another chunk of data has been recieved, so append it to `str`
              response.on('data', function (chunk) {
@@ -82,6 +82,11 @@ app.get('/searchmail',function (req, res) {
                 res.render('index.html',{name: JSONElements.name})
             });
         }).end();
+
+        request.on('error', function(err) {
+            console.log("ERRORE: "+err);
+        });
+
 
    }
 })
