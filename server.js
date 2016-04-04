@@ -85,11 +85,6 @@ app.get('/searchmail',function (req, res) {
             });
         }).end();
 
-        request.on('error', function(err) {
-            console.log("ERRORE: "+err);
-        });
-
-
    }
 })
 
