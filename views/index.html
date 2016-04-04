@@ -80,19 +80,28 @@
         </div>
         <div class="col-md-4">
             <h2>Get all</h2>
-            <p><a class="btn btn-primary" href="/getall" role="button">Get All »</a></p>
+            <p><a class="btn btn-primary" href="/getAll" role="button">Get All »</a></p>
+            <p><a class="btn btn-primary" href="/getRemote" role="button">Get Remote »</a></p>
         </div>
     </div>
-    <% if (name) { %>
+    <% if (elements.length != undefined) {
+        for (el of elements) { %>
         <hr>
         <div class="container">
-            <h2>Name: <%= name %></h2>
+            <li>
+                <el><h3><%= el.name %> <%= el.surname %> <%=el.email %></h3></el>
+            </li>
         </div>
-    <% } if (name == null) { %>
+    <% } } else {
+        if (elements.name == null) { %>
         <div class="container">
             <h3>No data</h3>
         </div>
-    <% } %>
+    <% } else { %>
+        <div class="container">
+            <h3><%= elements.name %> <%= elements.surname %> <%= elements.email %></h3>
+        </div>
+    <% } }%>
     <hr>
 
     <footer>

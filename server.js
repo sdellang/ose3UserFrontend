@@ -12,6 +12,8 @@ var ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var serviceHost = process.env.MAIL_SERVICE_HOST || 'userservice.apps.gen.local';
 var servicePort = process.env.MAIL_SERVICE_PORT || 80;
 var mailPath = process.env.MAIL_SERVICE_PATH || '/ws/parks/findmail'
+var getAllPath = process.env.GETALL_SERVICE_PATH || '/ws/parks/'
+var RemoteHost = process.env.GET_REMOTE_SERVICE || "remote"
 /*var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
 var mongoURLLabel = "";
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
@@ -55,7 +57,7 @@ var initDb = function(callback) {
 };
 */
 app.get('/', function (req, res) {
-      res.render('index.html', {name: ""});
+      res.render('index.html', {elements: ""});
 });
 
 app.get('/searchmail',function (req, res) {
@@ -79,13 +81,71 @@ app.get('/searchmail',function (req, res) {
                 console.log(str);
                 console.log(JSON.stringify(str))
                 var JSONElements = JSON.parse(str);
-                console.log("name "+JSONElements.name)
-
-                res.render('index.html',{name: JSONElements.name})
+                console.log("name "+JSONElements.length)
+                if(JSONElements == undefined) {
+                   res.render('index.html',{elements: ''});
+                } else {
+                   res.render('index.html',{elements: JSONElements});
+                }
             });
         }).end();
 
    }
+})
+
+app.get('/getAll',function (req, res) {
+   console.log(serviceHost+getAllPath);
+   var str = '';
+   if (serviceHost) {
+        var options = {
+            host: serviceHost,
+            path: getAllPath,
+            port: servicePort
+        };
+        var request = http.request(options,function (response) {
+
+             //another chunk of data has been recieved, so append it to `str`
+             response.on('data', function (chunk) {
+               str += chunk;
+             });
+
+            response.on('end',function() {
+                console.log(str);
+                console.log(JSON.stringify(str))
+                var JSONElements = JSON.parse(str);
+                console.log("name "+JSONElements.length)
+
+                res.render('index.html',{elements: JSONElements})
+            });
+        }).end();
+
+   }
+})
+
+app.get('/getRemote', function(req, rea) {
+    var str = '';
+       if (remoteHost) {
+            var options = {
+                host: remoteHost,
+                path: "/"
+            };
+            var request = http.request(options,function (response) {
+
+                 //another chunk of data has been recieved, so append it to `str`
+                 response.on('data', function (chunk) {
+                   str += chunk;
+                 });
+
+                response.on('end',function() {
+                    console.log(str);
+                    console.log(JSON.stringify(str))
+                    var JSONElements = JSON.parse(str);
+                    console.log("name "+JSONElements.length)
+
+                    res.render('index.html',{elements: JSONElements})
+                });
+            }).end();
+        }
 })
 
 // error handling
