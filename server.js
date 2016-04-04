@@ -10,6 +10,7 @@ app.engine('html', require('ejs').renderFile);
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
 var serviceHost = process.env.MAIL_SERVICE_HOST || 'userservice.apps.gen.local';
+var servicePort = process.env.MAIL_SERVICE_PORT || 80;
 var mailPath = process.env.MAIL_SERVICE_PATH || '/ws/parks/findmail'
 /*var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
 var mongoURLLabel = "";
@@ -64,7 +65,8 @@ app.get('/searchmail',function (req, res) {
    if (serviceHost) {
         var options = {
             host: serviceHost,
-            path: path
+            path: path,
+            port: servicePort
         };
         var request = http.request(options,function (response) {
 
