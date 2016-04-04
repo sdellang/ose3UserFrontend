@@ -84,12 +84,12 @@
             <p><a class="btn btn-primary" href="/getRemote" role="button">Get Remote »</a></p>
         </div>
     </div>
-    <% if (elements.length != undefined) {
-        for (el of elements) { %>
+     <% if (elements.length != undefined) { %>
+     <%   for (var i=0; i < elements.length ; i++) { %>
         <hr>
         <div class="container">
             <li>
-                <el><h3><%= el.name %> <%= el.surname %> <%=el.email %></h3></el>
+                <el><h3><%= elements[i].name %> <%= elements[i].surname %> <%= elements[i].email %></h3></el>
             </li>
         </div>
     <% } } else {
