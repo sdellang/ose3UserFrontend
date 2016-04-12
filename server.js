@@ -130,7 +130,7 @@ app.get('/getRemote', function(req, rea) {
             var options = {
                 host: remoteHost,
                 port: remotePort,
-                path: "/"
+                path: remotePath
             };
             var request = http.request(options,function (response) {
 
