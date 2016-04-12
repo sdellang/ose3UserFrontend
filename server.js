@@ -13,8 +13,8 @@ var serviceHost = process.env.MAIL_SERVICE_HOST || 'userservice.apps.gen.local';
 var servicePort = process.env.MAIL_SERVICE_PORT || 80;
 var mailPath = process.env.MAIL_SERVICE_PATH || '/ws/parks/findmail'
 var getAllPath = process.env.GETALL_SERVICE_PATH || '/ws/parks/'
-var remoteHost = process.env.EXTERNAL_SERVICE_SERVICE_HOST || "remote"
-var remotePort = process.env.EXTERNAL_SERVICE_SERVICE_PORT || 8080
+var remoteHost = process.env.GET_REMOTE_SERVICE || "remote"
+//var remotePort = process.env.EXTERNAL_SERVICE_SERVICE_PORT || 8080
 var remotePath = process.env.GET_REMOMTE_PATH || "/sdellang/Ose3UserService/master/remote.json"
 /*var mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL;
 var mongoURLLabel = "";
@@ -129,7 +129,6 @@ app.get('/getRemote', function(req, rea) {
        if (remoteHost) {
             var options = {
                 host: remoteHost,
-                port: remotePort,
                 path: remotePath
             };
             var request = http.request(options,function (response) {
